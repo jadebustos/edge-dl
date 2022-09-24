@@ -38,8 +38,7 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input directory --model xception --weights xception.h5 \
-                                         --graphical
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input directory --model xception ---graphical
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
@@ -47,8 +46,7 @@ Where:
 
 * **--input directory** tells the application that must read videos from */opt/violence-detector/input*. Before running the application copy in this directory the videos you want to analyze.
 * **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). In this case **xception** will be the directory name where the model was exported. 
-* **--weights xception.h5** tells the application where the weights are. The weights will be loaded from */opt/violence-detector/models*.
-* **--graphical** tels the application that graphical mode is available and a window will be openned to see the images and the prediction. This argument is optional. 
+* **--graphical** tels the application that graphical mode is available and a window will be openned to see the images and the prediction. To quit press *q*. This argument is optional. 
 
 Preditions will be saved within directory */opt/violence-detector/output*. Images will be stored together with the prediction and a csv file will be created with all the information as well.
 
@@ -59,8 +57,8 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input webcam --model xception --weights xception.h5 \
-                                        --device 1 --graphical --width 800 --height 600
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input webcam --model xception \
+                                            --device 1 --graphical --width 800 --height 600
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
@@ -68,9 +66,8 @@ Where:
 
 * **--input directory** tells the application that must read videos from */opt/violence-detector/input*. Before running the application copy in this directory the videos you want to analyze.
 * **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). In this case **xception** will be the directory name where the model was exported. 
-* **--weights xception.h5** tells the application where the weights are. The weights will be loaded from */opt/violence-detector/models*.
 * **--device 1** tells the application the video device to use is **/dev/video1**. To see how to get the video devices check [video-devices.md](video-devices.md). 
-* **--graphical** tells the application that graphical mode is available and a window will be openned to see the images and the prediction. This argument is optional. 
+* **--graphical** tells the application that graphical mode is available and a window will be openned to see the images and the prediction. To quit press *q*. This argument is optional. 
 * **--width 800** tells the application the width component for the webcam resolution. By default 1280 is used.This argument is optional.
 * **--height 600** tells the application the height component for the webcam resolution. By default 720 is used.This argument is optional.
 
