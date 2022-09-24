@@ -78,11 +78,11 @@ To use your own custom model you need:
   ```bash
   [jadebustos@archimedes violence-detector]$ ls -lh models/
   total 474M
-  drwxr-xr-x. 4 jadebustos jadebustos   84 Sep 11 09:43 xception
-  -rw-r--r--. 1 jadebustos jadebustos 474M Sep 13 23:32 xception.h5
+  drwxr-xr-x. 4 jadebustos jadebustos   84 Sep 11 09:43 mycustommodel
+  -rw-r--r--. 1 jadebustos jadebustos 474M Sep 13 23:32 mycustommodelweights.h5
   [jadebustos@archimedes violence-detector]$
   ```
 
-> ![](../icons/warning-icon.png) Your model will have to use 200x200 image size. If you need to change the model image size you can modify it in the file [myvars.py](myvars.py).
+> ![](../icons/warning-icon.png) Your model will have to use a 200x200 image size. If you need to change the model image size you can modify it in the file [myvars.py](myvars.py).
 
-After that you can run the violent-detector application.
+After that you can run the violent-detector application using **--model mycustomodel** and **--weights mycustommodelweights.h5**.
