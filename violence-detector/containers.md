@@ -25,13 +25,15 @@ To build the x86_64 image you need:
   ...
   ```
 
+You can build the container image:
+
 ```bash
 [jadebustos@archimedes violence-detector]$ buildah build -f Dockerfile.tensorflow.x86_64 -t violence-detector:v1
 ...
 [jadebustos@archimedes violence-detector]$
 ```
 
-This will build the image:
+The image is ready to be used:
 
 ```bash
 [jadebustos@archimedes violence-detector]$ podman images
@@ -47,7 +49,9 @@ quay.io/centos/centos               stream9     047d6e0a5993  4 days ago        
 
 ## Using the container image for video files processing
 
+To process videos you need to copy them within a directory, for instance *~/videos/input*. You also need to create a directory to store the predictions, for instance *~/videos/output*.
 
+As containers are non-persistent by default we will map the above directories. Thus the container will be able to access the videos to read them and the stored predictions will not be deleted after container termination.
 
 ```bash
 [jadebustos@archimedes ~]$ podman run --rm --privileged --env INPUT='directory' \
