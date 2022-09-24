@@ -144,6 +144,15 @@ To build the x86_64 image you need:
 * Export a model within the *models* directory. 
 * Go to the *models* directory and compress it.
 * Copy the weights file in the *models* directory.
+
+  ```bash
+  [jadebustos@archimedes violence-detector]$ ls -lh models/
+  total 474M
+  drwxr-xr-x. 4 jadebustos jadebustos   84 Sep 11 09:43 xception
+  -rw-r--r--. 1 jadebustos jadebustos 474M Sep 13 23:32 xception.h5
+  [jadebustos@archimedes violence-detector]$
+  ```
+
 * Modify the [Dockerfile.tensorflow.x86_64](Dockerfile.tensorflow.x86_64) to fit your files:
 
   ```dockerfile
