@@ -33,12 +33,12 @@ RUN set -ex \
 COPY *py requirements.txt entrypoint.sh /srv/violence-detector/
 # model is not included in the repository, so if you want to create the 
 # container image you need to provide your own
-COPY models/xception/ /opt/violence-detector/models/
+ADD models/xception.tgz /opt/violence-detector/models/
 
 # install violence-detector dependencies
 RUN set -ex \
     && chmod 0555 /srv/violence-detector/entrypoint.sh \
-    && dnf install python3-pip -y \
+    && dnf install python3-pip libglvnd-glx -y \
     && python3.9 -m pip install --upgrade pip \
 #    && pip3 install virtualenv \
 #    && virtualenv -p /usr/bin/python3.9 tensorflow \

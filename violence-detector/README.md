@@ -38,7 +38,7 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input directory --model xception ---graphical
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py --input directory --model xception ---graphical
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
@@ -57,7 +57,7 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input webcam --model xception \
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py --input webcam --model xception \
                                             --device 1 --graphical --width 800 --height 600
 (tfm-tf) jadebustos@reypastor:tfm$
 ```

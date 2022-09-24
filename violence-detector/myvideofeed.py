@@ -77,7 +77,7 @@ def predict_videos(model, videos, videos_path, args):
             
             # label frames
             for item in range(len(frames_filenames)):
-                if prediction[item] > 0.5:
+                if prediction[item][0] > 0.5:
                     prob = round(100 * prediction[item][0], 2)
                     label = "Non-Violence: " + str(prob) + ' %'
                     # text color
