@@ -16,9 +16,17 @@ Whereas docker includes all functionality, [Podman](https://podman.io/) only run
 
 Although all the examples in this repository use podman, you can use docker as well.
 
+### Installing podman in Debian 11 (Bullseye) or newer
+
+Podman, buildah and skopeo are available in the official Debian repositories for Debian 11 or newer, so you only need to install them:
+
+```bash
+root@reypastor:~# apt install podman buildah skopeo -y
+```
+
 ### Installing podman in Ubuntu 20.10 or newer
 
-Podman, buildah and skopeo are available in the official Ubuntu repositories for these versions so you only need to install them:
+Podman, buildah and skopeo are available in the official Ubuntu repositories for Ubuntu 20.10 or newer, so you only need to install them:
 
 ```bash
 root@reypastor:~# apt install podman buildah skopeo -y
@@ -27,6 +35,10 @@ root@reypastor:~# apt install podman buildah skopeo -y
 ### Installing podman in Ubuntu 20.04 or earlier
 
 You will need to configure the [kubic repository to be able to install podman](https://phoenixnap.com/kb/install-podman-on-ubuntu).
+
+### Installing podman for other Linux distributions
+
+For other Linux distributions you can get how to install Podman from [the Podman documentation](https://podman.io/getting-started/installation).
 
 ## Getting the container image for violence-detector 
 
