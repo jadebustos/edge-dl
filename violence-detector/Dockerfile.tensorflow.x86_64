@@ -19,6 +19,7 @@ LABEL url="https://quay.io/repository/rhte_2019/face-recognition"
 ENV VIDEO_INDEX=0
 ENV INPUT="directory"
 ENV MODEL="xception"
+ENV WEIGHTS="xception.h5"
 ENV WIDTH=800
 ENV HEIGHT=600
 
@@ -34,6 +35,7 @@ COPY *py requirements.txt entrypoint.sh /srv/violence-detector/
 # model is not included in the repository, so if you want to create the 
 # container image you need to provide your own
 ADD models/xception.tgz /opt/violence-detector/models/
+COPY models/xception.h5 /opt/violence-detector/models/
 
 # install violence-detector dependencies
 RUN set -ex \

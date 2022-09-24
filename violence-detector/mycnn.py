@@ -10,9 +10,11 @@ import os
 from myvars import *
 
 # model is read from directory nn_name under MODELS_DIR directory
-def create_cnn(nn_name):
+# weights are read from directory nn_weights under MODELS_DIR directory
+def create_cnn(nn_name, nn_weights):
     try:
         mymodel = tf.keras.models.load_model(os.path.join(MODELS_DIR, nn_name))
+        mymodel.load_weights(os.path.join(MODELS_DIR, nn_weights))
     except Exception as e:        
         print("*************************************************")
         print("Error creating model.")

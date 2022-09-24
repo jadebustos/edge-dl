@@ -27,6 +27,9 @@ def main():
     parser.add_argument("-m", "--model", type=str, required=True, 
                             help = "Model directory.")
 
+    parser.add_argument("-w", "--weights", type=str, required=True, 
+                            help = "Model weights filename.")
+
     parser.add_argument("-d", "--device", type=int, help="Video device index")
 
     parser.add_argument("-t", "--height", type=int, default=800, 
@@ -56,7 +59,7 @@ def main():
             sys.exit(251)
 
     # model creation
-    mymodel = create_cnn(args.model)
+    mymodel = create_cnn(args.model, args.weights)
     mymodel.summary()
 
     if args.input == 'directory':
