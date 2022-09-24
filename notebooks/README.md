@@ -54,7 +54,7 @@ Unfortunately I did not have enough time to train a good LSTM model. As you can 
 
 Although, this model is useless it is interesting understand how data is loaded to be used for the LSTM model, and the input shape as well.
 
-For the CNNs the input shape is [200,200,3]. So if the dataset image has 9600 images the data shape will be [9600,200,200,3].
+For the CNNs the input shape is [200,200,3]. So, if the dataset image has 9600 images the data shape will be [9600,200,200,3].
 
 LSTM processes sequences. That means that instead of loading an image a sequence will be loaded. If the dataset has 300 videos and we sample 16 frames for each video the data shape will be [300,16,200,200,3].
 
