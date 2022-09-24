@@ -171,6 +171,8 @@ For instance, to process images from the webcam using your custom model:
                              --name violence-detector -d docker.io/jadebustos2/violence-detector
 ```
 
+> ![](../icons/warning-icon.png) Your model will have to use 200x200 image size.
+
 ## Building your own image
 
 To build the x86_64 image you need:
@@ -220,3 +222,5 @@ localhost/violence-detector         v1          2bceeaf1290b  20 minutes ago    
 quay.io/centos/centos               stream9     047d6e0a5993  4 days ago         160 MB
 [jadebustos@archimedes violence-detector]$
 ```
+
+> ![](../icons/tip-icon.png) If you want to use image size different from 200x200 you can change it in [myvars.py](myvars.py).
