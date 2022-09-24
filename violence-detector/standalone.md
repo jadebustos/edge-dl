@@ -67,3 +67,22 @@ Where:
 * **--height 600** tells the application the height component for the webcam resolution. By default 720 is used.This argument is optional.
 
 Predictions will be saved within directory */opt/violence-detector/output*. Images will be stored together with the prediction and a csv file will be created with all the information as well.
+
+## Using your own custom model
+
+To use your own custom model you need:
+
+* Export a model within the *models* directory. 
+* Copy the weights file in the *models* directory.
+
+  ```bash
+  [jadebustos@archimedes violence-detector]$ ls -lh models/
+  total 474M
+  drwxr-xr-x. 4 jadebustos jadebustos   84 Sep 11 09:43 xception
+  -rw-r--r--. 1 jadebustos jadebustos 474M Sep 13 23:32 xception.h5
+  [jadebustos@archimedes violence-detector]$
+  ```
+
+> ![](../icons/warning-icon.png) Your model will have to use 200x200 image size. If you need to change the model image size you can modify it in the file [myvars.py](myvars.py).
+
+After that you can run the violent-detector application.

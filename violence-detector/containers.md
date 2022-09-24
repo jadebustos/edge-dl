@@ -173,7 +173,7 @@ For instance, to process images from the webcam using your custom model:
 
 > ![](../icons/warning-icon.png) Your model will have to use 200x200 image size.
 
-## Building your own image
+## Building your own container image
 
 To build the x86_64 image you need:
 
@@ -183,9 +183,9 @@ To build the x86_64 image you need:
 
   ```bash
   [jadebustos@archimedes violence-detector]$ ls -lh models/
-  total 474M
-  drwxr-xr-x. 4 jadebustos jadebustos   84 Sep 11 09:43 xception
-  -rw-r--r--. 1 jadebustos jadebustos 474M Sep 13 23:32 xception.h5
+  total 728M
+-rw-r--r--. 1 jadebustos jadebustos 254M Sep 12 22:26 myvgg16-model.tgz
+-rw-r--r--. 1 jadebustos jadebustos 474M Sep 12 22:33 myvgg16-weights.h5
   [jadebustos@archimedes violence-detector]$
   ```
 
@@ -193,11 +193,11 @@ To build the x86_64 image you need:
 
   ```dockerfile
   ...
-  ENV MODEL="xception"
-  ENV WEIGHTS="xception.h5"
+  ENV MODEL="myvgg16-model"
+  ENV WEIGHTS="myvgg16-weights.h5"
   ...
-  ADD models/xception.tgz /opt/violence-detector/models/
-  COPY models/xception.h5 /opt/violence-detector/models/
+  ADD models/myvgg16-model.tgz /opt/violence-detector/models/
+  COPY models/myvgg16-weights.h5 /opt/violence-detector/models/
   ...
   ```
 
@@ -223,4 +223,4 @@ quay.io/centos/centos               stream9     047d6e0a5993  4 days ago        
 [jadebustos@archimedes violence-detector]$
 ```
 
-> ![](../icons/tip-icon.png) If you want to use image size different from 200x200 you can change it in [myvars.py](myvars.py).
+> ![](../icons/tip-icon.png) If you want to use a image size different from 200x200 you can change it in [myvars.py](myvars.py).
