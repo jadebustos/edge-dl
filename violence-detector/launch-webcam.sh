@@ -4,6 +4,6 @@ podman run --rm --privileged --env INPUT='webcam' --env MODEL='xception' --env W
 	                     --env VIDEO_INDEX=1 \
                              -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts \
                              -v /opt/violence-detector/output:/opt/violence-detector/output:Z \
-                             --name violence-detector -d localhost/violence-detector:v1
+                             --name violence-detector -d docker.io/jadebustos2/violence-detector
 #                             --entrypoint /bin/bash -it localhost/violence-detector:v1
 #                             -v /opt/violence-detector/input:/opt/violence-detector/input:Z \

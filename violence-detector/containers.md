@@ -81,6 +81,7 @@ As containers are non-persistent by default we will map the above directory. Thu
 where:
 
 * **--privileged** tells podman to start the container into the privileged mode. By default podman does not start container with privileges for security reasons. This is needed to access the webcam device.
+* **--env WIDTH=1280 --env HEIGHT=720** configures the webcam resolution. These environment variables are optional, if not used 800x600 will be used.
 * **-v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts** tells podman to mount the */dev* filesystem in the container which will allow the container to access the webcam device.
 * *~/videos/output* is the directory where the analized images will be stored. This directory is mapped to the container directory */opt/violence-detector/output*. The **:Z** is needed if you have SELINUX enabled.
 
@@ -95,6 +96,45 @@ violence-detector
 [jadebustos@archimedes violence-detector]$ podman ps
 CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
 [jadebustos@archimedes violence-detector]$ 
+```
+
+## Using your own model
+
+Although the container includes a trained model you can use your own model.
+
+You have to export the model as explained in [exporting-models.md](exporting-models.md).
+
+Copy the model and the weights file to a directory. For instance, *~/mymodels* and start the container adding the following:
+
+```
+-v ~/mymodels:/opt/violence-detector/models:Z
+```
+
+this will map the directory where you have stored your model to the containers' directory where the violence-detector application loads the model. For instance, if your model:
+
+```bash
+[jadebustos@archimedes violence-detector]$ ls -lh ~/mymodels/
+total 474M
+drwxr-xr-x. 4 jadebustos jadebustos   84 Sep 11 10:20 myvgg16-weights
+-rw-r--r--. 1 jadebustos jadebustos 474M Sep 14 00:40 myvgg16-weights.h5
+[jadebustos@archimedes violence-detector]$
+```
+
+you will have to add:
+
+* **--env MODEL='myvgg16-model'** to load your custom model.
+* **--env WEIGHTS='myvgg16-weights.h5'** to load the weights.
+
+For instance, to process images from the webcam using your custom model:
+
+```bash
+[jadebustos@archimedes ~]$ podman run --rm --privileged --env INPUT='webcam' --env VIDEO_INDEX=1 \
+                             --env MODEL='myvgg16-model' --env WEIGHTS='myvgg16-weights.h5' \
+                             --env WIDTH=1280 --env HEIGHT=720 \
+                             -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts \
+                             -v ~/mymodels:/opt/violence-detector/models:Z \
+                             -v ~/videos/output:/opt/violence-detector/output:Z \
+                             --name violence-detector -d docker.io/jadebustos2/violence-detector
 ```
 
 ## Building your own image
