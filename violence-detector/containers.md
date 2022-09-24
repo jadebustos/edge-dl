@@ -47,6 +47,15 @@ quay.io/centos/centos               stream9     047d6e0a5993  4 days ago        
 [jadebustos@archimedes violence-detector]$
 ```
 
+To run the application some arguments are needed. These arguments can be passed to the container image as environment variables. The environment variables that can be used are:
+
+* **VIDEO_INDEX** to tell the application the video device. By default this variable is set to **0**, so the default video device is */dev/video0*. This variable is mapped to the **--device** argument.
+* **INPUT** to tell the application from where video will be read. By default is set to *directory*. This variable can take two values, **directory** and **webcam**. This variable is mapped to the **--input** argument.
+* **MODEL** to tell the application what model to load. By default is set to *xception*. This variable is mapped to the **--model** argument.
+* **WEIGHTS** to tell the application what weights to load for the model. By defalt is set to *xception.h5*. This variable is mapped to the **--weights** argument.
+* **WIDTH** to tell the application the webcam's width. By default is set to *800*. This variable is mapped to the **--width** argument.
+* **HEIGHT** to tell the application the webcam's height. By default is set to *600*. This variable is mapped to the **--height** argument.
+
 ## Using the container image for video file processing
 
 To process videos you need to copy them within a directory, for instance *~/videos/input*. You also need to create a directory to store the predictions, for instance *~/videos/output*.
