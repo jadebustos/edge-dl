@@ -6,7 +6,98 @@ The container engine used will be [Podman](https://podman.io/). [Buildah](https:
 
 Docker can be used as well.
 
-## Building the image
+## Getting the container image for violence-detector 
+
+You do not need to build the container image. A tensorflow container image has been built so you can use it although you do not have any Intel Movidius device.
+
+The image is available at my [docker repository](https://hub.docker.com/r/jadebustos2/violence-detector) and it includes a Xception model which achieved the following metrics over the test dataset:
+
+* **Accuracy:** 96.50 %
+* **Recall:** 94.71 %
+* **Precision:** 98.50 %
+* **Specificity:** 98.44 %
+* **F1:** 0.9657
+
+When evaluated over the [fight detection surveillance dataset](https://github.com/sayibet/fight-detection-surv-dataset):
+
+* **Accuracy:** 52.00 %
+* **Recall:** 51.30 %
+* **Precision:** 78.67 %
+* **Specificity:** 54.29 %
+* **F1:** 0.6211
+
+When evaluated over the [airtlab dataset](https://github.com/airtlab/A-Dataset-for-Automatic-Violence-Detection-in-Videos):
+
+* **Accuracy:** 70.86 %
+* **Recall:** 70.51 %
+* **Precision:** 95.65 %
+* **Specificity:** 73.68 %
+* **F1:** 0.8118
+
+To run the application some arguments are needed. These arguments can be passed to the container image as environment variables. The environment variables that can be used are:
+
+* **VIDEO_INDEX** to tell the application the video device. By default this variable is set to **0**, so the default video device is */dev/video0*. This variable is mapped to the **--device** argument.
+* **INPUT** to tell the application from where video will be read. By default is set to *directory*. This variable can take two values, **directory** and **webcam**. This variable is mapped to the **--input** argument.
+* **MODEL** to tell the application what model to load. By default is set to *xception*. This variable is mapped to the **--model** argument.
+* **WEIGHTS** to tell the application what weights to load for the model. By default is set to *xception.h5*. This variable is mapped to the **--weights** argument.
+* **WIDTH** to tell the application the webcam's width. By default is set to *800*. This variable is mapped to the **--width** argument.
+* **HEIGHT** to tell the application the webcam's height. By default is set to *600*. This variable is mapped to the **--height** argument.
+
+## Using the container image for video file processing
+
+To process videos you will need to copy them within a directory, for instance *~/videos/input*. You also need to create a directory to store the predictions, for instance *~/videos/output*.
+
+As containers are non-persistent by default we will map the above directories. Thus the container will be able to access the videos to read them and the stored predictions will not be deleted after container termination.
+
+```bash
+[jadebustos@archimedes ~]$ podman run --rm --env INPUT='directory' \
+                                -v ~/videos/input:/opt/violence-detector/input:Z \
+                                -v ~/videos/output:/opt/violence-detector/output:Z \
+                                --name violence-detector -d docker.io/jadebustos2/violence-detector
+```
+
+where:
+
+* *~/videos/input* is the directory where are stored the videos we want to analyse. This directory is mapped to the container directory */opt/violence-detector/input*. The **:Z** is needed if you have SELINUX enabled.
+* *~/videos/output* is the directory where the analized images will be stored. A directory for each video will be created in this directory. This directory is mapped to the container directory */opt/violence-detector/output*. The **:Z** is needed if you have SELINUX enabled.
+
+The container will automatically stop after all the videos in the directory *~/videos/input* are processed.
+
+## Using the container image for webcam image processing
+
+To process images for the webcam you will need to create a directory to store the processed images. For instance, *~/videos/output*.
+
+As containers are non-persistent by default we will map the above directory. Thus the container will be able to store predictions that will not be deleted after container termination.
+
+```bash
+[jadebustos@archimedes ~]$ podman run --rm --privileged --env INPUT='webcam' --env VIDEO_INDEX=1 \
+                             --env WIDTH=1280 --env HEIGHT=720 \
+                             -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts \
+                             -v ~/videos/output:/opt/violence-detector/output:Z \
+                             --name violence-detector -d docker.io/jadebustos2/violence-detector
+
+```
+
+where:
+
+* **--privileged** tells podman to start the container into the privileged mode. By default podman does not start container with privileges for security reasons. This is needed to access the webcam device.
+* **-v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts** tells podman to mount the */dev* filesystem in the container which will allow the container to access the webcam device.
+* *~/videos/output* is the directory where the analized images will be stored. This directory is mapped to the container directory */opt/violence-detector/output*. The **:Z** is needed if you have SELINUX enabled.
+
+The container image will be running until the container is stopped:
+
+```bash
+[jadebustos@archimedes violence-detector]$ podman ps
+CONTAINER ID  IMAGE                                           COMMAND     CREATED        STATUS             PORTS       NAMES
+e7e264116a37  docker.io/jadebustos2/violence-detector:latest              9 seconds ago  Up 10 seconds ago              violence-detector
+[jadebustos@archimedes violence-detector]$ podman stop violence-detector
+violence-detector
+[jadebustos@archimedes violence-detector]$ podman ps
+CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
+[jadebustos@archimedes violence-detector]$ 
+```
+
+## Building your own image
 
 To build the x86_64 image you need:
 
@@ -45,39 +136,4 @@ localhost/violence-detector         v1          2bceeaf1290b  20 minutes ago    
 <none>                              <none>      1a0339f218a6  3 hours ago        205 MB
 quay.io/centos/centos               stream9     047d6e0a5993  4 days ago         160 MB
 [jadebustos@archimedes violence-detector]$
-```
-
-To run the application some arguments are needed. These arguments can be passed to the container image as environment variables. The environment variables that can be used are:
-
-* **VIDEO_INDEX** to tell the application the video device. By default this variable is set to **0**, so the default video device is */dev/video0*. This variable is mapped to the **--device** argument.
-* **INPUT** to tell the application from where video will be read. By default is set to *directory*. This variable can take two values, **directory** and **webcam**. This variable is mapped to the **--input** argument.
-* **MODEL** to tell the application what model to load. By default is set to *xception*. This variable is mapped to the **--model** argument.
-* **WEIGHTS** to tell the application what weights to load for the model. By defalt is set to *xception.h5*. This variable is mapped to the **--weights** argument.
-* **WIDTH** to tell the application the webcam's width. By default is set to *800*. This variable is mapped to the **--width** argument.
-* **HEIGHT** to tell the application the webcam's height. By default is set to *600*. This variable is mapped to the **--height** argument.
-
-## Using the container image for video file processing
-
-To process videos you need to copy them within a directory, for instance *~/videos/input*. You also need to create a directory to store the predictions, for instance *~/videos/output*.
-
-As containers are non-persistent by default we will map the above directories. Thus the container will be able to access the videos to read them and the stored predictions will not be deleted after container termination.
-
-```bash
-[jadebustos@archimedes ~]$ podman run --rm --privileged --env INPUT='directory' \
-                                -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts \
-                                -v ~/videos/input:/opt/violence-detector/input:Z \
-                                -v ~/videos/output:/opt/violence-detector/output:Z \
-                                --name violence-detector -d localhost/violence-detector:v1
-```
-
-## Using the container image for webcam image processing
-
-```bash
-[jadebustos@archimedes ~]$ podman run --rm --privileged --env INPUT='webcam' --env VIDEO_INDEX=1 \
-                            --env MODEL='xception' --weights='xception.h5' \
-                             --env WIDTH=1280 --env HEIGHT=720 \
-                             -v /dev/:/dev:rslave --mount type=devpts,destination=/dev/pts \
-                             -v ~/videos/output:/opt/violence-detector/output:Z \
-                             --name violence-detector -d localhost/violence-detector:v1
-
 ```
