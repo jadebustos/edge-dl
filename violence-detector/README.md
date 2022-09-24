@@ -26,6 +26,10 @@ It is recommended using [python virtual environments](virtual-environment.md) wi
 * *opencv-python*, 4.6.0.66 version was used.
 * *tensorflow*, 2.5.3 version was used.
 
+Images will be resized to 200x200 to feed the deep learning models. If you use your own models you will need to modify **IMAGE_WIDTH** and **IMAGE_HEIGHT** variables in [myvars.py](myvars.py) to fit your input shape.
+
+By default one of each five images will be choosen to make a prediction. If you want to modify that you need to change the **FRAMES_STEP** variable in [myvars.py](myvars.py) accordingly.
+
 ## Running the violence-detector application for video files processing
 
 Activate the python virtual environment and run:
@@ -41,6 +45,6 @@ jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 Where:
 
 * **--input directory** tells the application that must read videos from */opt/violence-detector/output*. Before running the application copy in this directory the videos you want to analyze.
-* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). 
+* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). In this case **xception** will be the directory name where the model was exported. 
 * **--weights xception.h5** tells the application where the weights are. The weights will be loaded from */opt/violence-detector/models*.
 * **--graphical** tels the application that graphical mode is available and a window will be openned to see the images and the prediction. 
