@@ -71,4 +71,4 @@ Where:
 * **--width 800** tells the application the width component for the webcam resolution. By default 1280 is used.This argument is optional.
 * **--height 600** tells the application the height component for the webcam resolution. By default 720 is used.This argument is optional.
 
-Preditions will be saved within directory */opt/violence-detector/output*. Images will be stored together with the prediction and a csv file will be created with all the information as well.
+Predictions will be saved within directory */opt/violence-detector/output*. Images will be stored together with the prediction and a csv file will be created with all the information as well.
