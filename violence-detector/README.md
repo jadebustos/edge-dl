@@ -20,8 +20,9 @@ The following directories must be created:
 * */opt/violence-detector/output*, predictions will be stored in this directory.
 * */opt/violence-detector/models*, deep learning models will be stored in this directory.
 
-It is recommended using [python virtual environments](virtual-environment.md) with the following python modules installed:
+It is recommended using [python virtual environments](virtual-environment.md). The following configuration was tested:
 
+* *python*, version 3.7 was used.
 * *numpy*, 1.19.5 version was used.
 * *opencv-python*, 4.6.0.66 version was used.
 * *tensorflow*, 2.5.3 version was used.
