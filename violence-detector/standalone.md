@@ -22,7 +22,7 @@ Images will be resized to 200x200 to feed the deep learning models. If you use y
 
 By default one of each five images will be choosen to make a prediction. If you want to modify that you need to change the **FRAMES_STEP** variable in [myvars.py](myvars.py) accordingly.
 
-## Running the violence-detector application for video files processing
+## Running the violence-detector application for video file processing
 
 Activate the python virtual environment and run:
 

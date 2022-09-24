@@ -47,7 +47,7 @@ quay.io/centos/centos               stream9     047d6e0a5993  4 days ago        
 [jadebustos@archimedes violence-detector]$
 ```
 
-## Using the container image for video files processing
+## Using the container image for video file processing
 
 To process videos you need to copy them within a directory, for instance *~/videos/input*. You also need to create a directory to store the predictions, for instance *~/videos/output*.
 
