@@ -43,7 +43,7 @@ Where:
 
 Preditions will be saved within directory */opt/violence-detector/output*. Images will be stored together with the prediction and a csv file will be created with all the information as well.
 
-## Running the violence-detector application for webcam images processing
+## Running the violence-detector application for webcam image processing
 
 Activate the python virtual environment and run:
 
