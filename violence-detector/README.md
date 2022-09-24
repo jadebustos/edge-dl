@@ -6,8 +6,10 @@ This application has been developed to be executed as a container image. For thi
 
 This applicantion can be used in two ways:
 
-* To process videos.
+* To process video files.
 * To process images from a webcam.
+
+This application is intended to test models so it uses tensorflow instead of OpenVINO. So, you can try it although you do not have a Myriad device.
 
 ## Requirements
 
@@ -24,16 +26,21 @@ It is recommended using [python virtual environments](virtual-environment.md) wi
 * *opencv-python*, 4.6.0.66 version was used.
 * *tensorflow*, 2.5.3 version was used.
 
-## Running the violence-detector application for video processing
+## Running the violence-detector application for video files processing
+
+Activate the python virtual environment and run:
 
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
 (tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector --input directory --model xception --weights xception.h5 \
-                                         --device 1 --graphical
-(tfm-tf) jadebustos@reypastor:tfm$
-(tfm-tf) jadebustos@reypastor:tfm$
-(tfm-tf) jadebustos@reypastor:tfm$
+                                         --graphical
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
+Where:
+
+* **--input directory** tells the application that must read videos from */opt/violence-detector/output*. Before running the application copy in this directory the videos you want to analyze.
+* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). 
+* **--weights xception.h5** tells the application where the weights are. The weights will be loaded from */opt/violence-detector/models*.
+* **--graphical** tels the application that graphical mode is available and a window will be openned to see the images and the prediction. 
