@@ -9,7 +9,7 @@ The following directories must be created:
 * */opt/violence-detector*, root directory for all data needed/producted.
 * */opt/violence-detector/input*, when videos are used to detect violent situations will be readed from this directory.
 * */opt/violence-detector/output*, predictions will be stored in this directory.
-* */opt/violence-detector/models*, deep learning models will be stored in this directory.
+* */opt/violence-detector/models*, deep learning models and weights will be stored in this directory.
 
 It is recommended using [python virtual environments](virtual-environment.md). The following configuration was tested:
 
@@ -29,7 +29,8 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py --input directory --model xception --weights xception.h5 --graphical
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py --input directory --model xception \
+                                                --weights xception.h5 --graphical
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
@@ -50,7 +51,8 @@ Activate the python virtual environment and run:
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
 (tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py --input webcam --model xception \
-                                            --weights xception.h5 --device 1 --graphical --width 800 --height 600
+                                                --weights xception.h5 --device 1 --graphical \
+                                                --width 800 --height 600
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
