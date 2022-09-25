@@ -1,5 +1,7 @@
 # Converting a Tensorflow 2.x model to OpenVINO
 
+Tensorflow models needs to be converted to IR format to be used by the Intel® Neural Compute Stick 2 (Intel® NCS2). 
+
 ## Exporting the Tensorflow 2.x model
 
 The tensorflow model has to be converte to a tensorflow frozen graph:
