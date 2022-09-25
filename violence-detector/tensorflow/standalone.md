@@ -37,7 +37,7 @@ jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 Where:
 
 * **--input directory** tells the application that must read videos from */opt/violence-detector/input*. Before running the application copy in this directory the videos you want to analyze.
-* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). In this case **xception** will be the directory name where the model was exported. 
+* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](../exporting-models.md). In this case **xception** will be the directory name where the model was exported. 
 * **--weights xception.h5** tells the application where the trained weights are. The weights will be loaded from */opt/violence-detector/models*.
 * **--graphical** tels the application that graphical mode is available and a window will be openned to see the images and the prediction. To quit press *q*. This argument is optional. 
 
@@ -59,9 +59,9 @@ jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 Where:
 
 * **--input directory** tells the application that must read videos from */opt/violence-detector/input*. Before running the application copy in this directory the videos you want to analyze.
-* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](exporting-models.md). In this case **xception** will be the directory name where the model was exported.
+* **--model xception** tells the application where the deep learning model is. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [exporting-models.md](../exporting-models.md). In this case **xception** will be the directory name where the model was exported.
 * **--weights xception.h5** tells the application where the trained weights are. The weights will be loaded from */opt/violence-detector/models*. 
-* **--device 1** tells the application the video device to use is **/dev/video1**. To see how to get the video devices check [video-devices.md](video-devices.md). 
+* **--device 1** tells the application the video device to use is **/dev/video1**. To see how to get the video devices check [video-devices.md](../video-devices.md). 
 * **--graphical** tells the application that graphical mode is available and a window will be openned to see the images and the prediction. To quit press *q*. This argument is optional. 
 * **--width 800** tells the application the width component for the webcam resolution. By default 1280 is used.This argument is optional.
 * **--height 600** tells the application the height component for the webcam resolution. By default 720 is used.This argument is optional.
