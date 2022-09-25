@@ -1,0 +1,51 @@
+# Copyright (c) 2022 Jose Angel de Bustos Perez
+# May be copied or modified under the terms of 
+# the GNU General Public License v3.0. 
+# See https://www.gnu.org/licenses/gpl-3.0.html
+
+# buildah build -f Dockerfile.tensorflow.x86_64 -t violence-detector:v1
+# podman run --rm -d violence-detector:v1
+
+
+FROM quay.io/centos/centos:stream9
+
+LABEL version=1.0
+LABEL maintainer="jadebustos@gmail.com"
+#LABEL name=
+LABEL description="Violence detection"
+LABEL url="https://quay.io/repository/rhte_2019/face-recognition"
+
+# violence-detector parameters
+ENV VIDEO_INDEX=0
+ENV INPUT="directory"
+ENV MODEL="xception"
+ENV WEIGHTS="xception.h5"
+ENV WIDTH=800
+ENV HEIGHT=600
+
+WORKDIR /srv/violence-detector
+
+# prepare environment
+RUN set -ex \
+    && dnf -q upgrade --refresh -y \
+    && mkdir -p /opt/violence-detector/{output,input,models}
+
+# install application
+COPY *py requirements.txt entrypoint.sh /srv/violence-detector/
+# model is not included in the repository, so if you want to create the 
+# container image you need to provide your own
+ADD models/xception.tgz /opt/violence-detector/models/
+COPY models/xception.h5 /opt/violence-detector/models/
+
+# install violence-detector dependencies
+RUN set -ex \
+    && chmod 0555 /srv/violence-detector/entrypoint.sh \
+    && dnf install python3-pip libglvnd-glx -y \
+    && python3.9 -m pip install --upgrade pip \
+#    && pip3 install virtualenv \
+#    && virtualenv -p /usr/bin/python3.9 tensorflow \
+#    && source tensorflow/bin/activate \\
+    && dnf -q clean all \
+    && pip install -r /srv/violence-detector/requirements.txt
+
+ENTRYPOINT ["./entrypoint.sh"]
