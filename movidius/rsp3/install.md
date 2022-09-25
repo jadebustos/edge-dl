@@ -32,7 +32,7 @@ and follow the official documentation.
 
 ## Check the OpenVINO runtime is working properly
 
-To check if the Intel® Neural Compute Stick 2 (Intel® NCS2) is detected execute the [check_inference_devices.py](../check_inference_devices.py):
+To check if the Intel® Neural Compute Stick 2 (Intel® NCS2) is detected execute [check_inference_devices.py](../check_inference_devices.py):
 
 ```bash
 pi@raspberrypi:~/edge-dl/movidius $ python3 check_inference_devices.py 
@@ -43,6 +43,7 @@ pi@raspberrypi:~/edge-dl/movidius $
 You can try with some Intel's models:
 
 ```bash
+pi@raspberrypi:~ $ cd build
 pi@raspberrypi:~/build $ git clone --depth 1 -b 2021.4.2 https://github.com/openvinotoolkit/open_model_zoo
 pi@raspberrypi:~/build $ cd open_model_zoo/tools/downloader/
 pi@raspberrypi:~/build/open_model_zoo/tools/downloader $
