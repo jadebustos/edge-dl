@@ -29,8 +29,10 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py ---input directory  --model-xml xception_frozen_graph.xml \
-                                      --model-bin xception_frozen_graph.bin --accelerator MYRIAD --graphical
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py ---input directory  \
+                                      --model-xml xception_frozen_graph.xml \
+                                      --model-bin xception_frozen_graph.bin \
+                                      --accelerator MYRIAD --graphical
 (tfm-tf) jadebustos@reypastor:tfm$
 ```
 
@@ -63,7 +65,7 @@ Where:
 * **--model-xml xception_frozen_graph.xml** tells the application where the deep learning model is. This model is in IR OpenVINO format. The model will be loaded from */opt/violence-detector/models*. To see how to export the model check [tensorflow2openvino.md](../../movidius/dev/tensorflow2openvino.md).
 * **--model-bin xception_frozen_graph.bin** tells the application where the trained weights are. The weights will be loaded from */opt/violence-detector/models*. To see how to export the model check [tensorflow2openvino.md](../../movidius/dev/tensorflow2openvino.md).
 * **--accelerator MYRIAD** tells the application what acceleration device use. Two values can be used, **CPU** or **MYRIAD**.
-* **--device 1** tells the application the video device to use is **/dev/video1**. To see how to get the video devices check [video-devices.md](video-devices.md). 
+* **--device 1** tells the application the video device to use is **/dev/video1**. To see how to get the video devices check [video-devices.md](../video-devices.md). 
 * **--graphical** tells the application that graphical mode is available and a window will be openned to see the images and the prediction. To quit press *q*. This argument is optional. 
 * **--width 800** tells the application the width component for the webcam resolution. By default 1280 is used.This argument is optional.
 * **--height 600** tells the application the height component for the webcam resolution. By default 720 is used.This argument is optional.
