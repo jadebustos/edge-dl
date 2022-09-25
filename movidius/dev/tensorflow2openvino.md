@@ -1,4 +1,4 @@
-# Converting a Tensorflow 2.x model to OpenVINO
+# Converting a Tensorflow 2.x model to OpenVINO IR format
 
 Tensorflow models needs to be converted to IR format to be used by the Intel® Neural Compute Stick 2 (Intel® NCS2). 
 

@@ -87,6 +87,6 @@ To use your own custom model you need:
   [jadebustos@archimedes violence-detector]$
   ```
 
-> ![](../icons/warning-icon.png) Your model will have to use a 200x200 image size. If you need to change the model image size you can modify it in the file [myvars.py](myvars.py).
+> ![](../../icons/warning-icon.png) Your model will have to use a 200x200 image size. If you need to change the model image size you can modify it in the file [myvars.py](myvars.py).
 
 After that you can run the violent-detector application using **--model-xml mycustomodelxml** and **--model-bin mycustommodelbin**.
