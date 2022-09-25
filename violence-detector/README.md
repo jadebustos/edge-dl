@@ -5,6 +5,11 @@ The violence applications has been created using two different technologies for 
 * Tensorflow 2.x.
 * OpenVINO toolkit.
 
+Application can be deployed:
+
+* Standalone.
+* Containerized (only x86_64).
+
 ## Tensorflow 2.0 version
 
 You can use this version in any computer and you can take advantage of NVIDIA GPUs if you have installed CUDA. If you have not got any NVIDIA GPU you still can use the application.
