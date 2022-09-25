@@ -28,8 +28,8 @@ jadebustos@movidius:~/edge-dl/movidius$ python3 /opt/intel/openvino_2021/deploym
 [ SUCCESS ] Memory consumed: 1862 MB. 
 jadebustos@movidius:~/edge-dl/movidius$ ls -lh xception_ir/
 total 139M
--rw-rw-r-- 1 jadebustos jadebustos 139M sep 25 15:51 xception_frozen_graph.bin
--rw-rw-r-- 1 jadebustos jadebustos  53K sep 25 15:51 xception_frozen_graph.mapping
--rw-rw-r-- 1 jadebustos jadebustos 161K sep 25 15:51 xception_frozen_graph.xml
+-rw-rw-r-- 1 jadebustos jadebustos 139M sep 10 15:51 xception_frozen_graph.bin
+-rw-rw-r-- 1 jadebustos jadebustos  53K sep 10 15:51 xception_frozen_graph.mapping
+-rw-rw-r-- 1 jadebustos jadebustos 161K sep 10 15:51 xception_frozen_graph.xml
 jadebustos@movidius:~/edge-dl/movidius$
 ```
