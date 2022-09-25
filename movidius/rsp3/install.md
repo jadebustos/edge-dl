@@ -21,7 +21,7 @@ It can be downloaded from [Intel's Open Source page](https://download.01.org/ope
 
 Once downloaded uncompress it:
 
-```
+```bash
 root@raspberrypi:~# mkdir /opt/intel
 root@raspberrypi:~# tar zxf l_openvino_toolkit_runtime_raspbian_p_2021.2.185.tgz -C /opt/intel/
 root@raspberrypi:~# mv /opt/intel/l_openvino_toolkit_runtime_raspbian_p_2021.2.185/ /opt/intel/openvino_2021.2.185
@@ -32,7 +32,17 @@ and follow the official documentation.
 
 ## Check the OpenVINO runtime is working properly
 
+To check if the Intel® Neural Compute Stick 2 (Intel® NCS2) is detected execute the [check_inference_devices.py](../check_inference_devices.py):
+
+```bash
+pi@raspberrypi:~/edge-dl/movidius $ python3 check_inference_devices.py 
+['MYRIAD']
+pi@raspberrypi:~/edge-dl/movidius $
 ```
+
+You can try with some Intel's models:
+
+```bash
 pi@raspberrypi:~/build $ git clone --depth 1 -b 2021.4.2 https://github.com/openvinotoolkit/open_model_zoo
 pi@raspberrypi:~/build $ cd open_model_zoo/tools/downloader/
 pi@raspberrypi:~/build/open_model_zoo/tools/downloader $
