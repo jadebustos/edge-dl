@@ -5,8 +5,6 @@
 # the GNU General Public License v3.0. 
 # See https://www.gnu.org/licenses/gpl-3.0.html
 
-#source ~/.pyenv/versions/3.7.5/envs/tfm-tf/bin/activate
-
 case $INPUT in
     "directory") /usr/bin/python3 violence-detector.py --input $INPUT --model $MODEL --weights $WEIGHTS ;;
     "webcam") /usr/bin/python3 violence-detector.py --input $INPUT --model $MODEL --weights $WEIGHTS \

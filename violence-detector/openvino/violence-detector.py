@@ -58,6 +58,10 @@ def main():
         print("In Raspberry Pi devices only webcam is allowed as input source.")
         exit(248)
 
+    if device_info.node == 'raspberrypi' and args['accelerator'] != 'MYRIAD':
+        print("In Raspberry Pi devices only MYRIAD is allowed as accelerator device.")
+        exit(248)
+
     # arguments validation
     if ( args['input'] not in ['webcam', 'directory'] ):
         print("Only webcam or directory are valid values for input argument.")

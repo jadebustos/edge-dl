@@ -1,4 +1,4 @@
-# Container
+# Containers
 
 Using containers allows you to use the application without having to struggle with installation.
 

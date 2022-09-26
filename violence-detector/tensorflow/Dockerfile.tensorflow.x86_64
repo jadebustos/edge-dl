@@ -13,7 +13,7 @@ LABEL version=1.0
 LABEL maintainer="jadebustos@gmail.com"
 #LABEL name=
 LABEL description="Violence detection"
-LABEL url="https://quay.io/repository/rhte_2019/face-recognition"
+LABEL url="https://hub.docker.com/r/jadebustos2/violence-detector"
 
 # violence-detector parameters
 ENV VIDEO_INDEX=0
@@ -42,9 +42,6 @@ RUN set -ex \
     && chmod 0555 /srv/violence-detector/entrypoint.sh \
     && dnf install python3-pip libglvnd-glx -y \
     && python3.9 -m pip install --upgrade pip \
-#    && pip3 install virtualenv \
-#    && virtualenv -p /usr/bin/python3.9 tensorflow \
-#    && source tensorflow/bin/activate \\
     && dnf -q clean all \
     && pip install -r /srv/violence-detector/requirements.txt
 

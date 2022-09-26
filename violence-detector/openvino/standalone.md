@@ -37,7 +37,7 @@ Activate the python virtual environment and run:
 ```bash
 jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
 (tfm-tf) jadebustos@reypastor:~$ cd tfm
-(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py ---input directory  \
+(tfm-tf) jadebustos@reypastor:tfm$ python3 violence-detector.py --input directory  \
                                       --model-xml xception_frozen_graph.xml \
                                       --model-bin xception_frozen_graph.bin \
                                       --accelerator MYRIAD --graphical
