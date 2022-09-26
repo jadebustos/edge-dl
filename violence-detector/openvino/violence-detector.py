@@ -6,8 +6,9 @@
 # See https://www.gnu.org/licenses/gpl-3.0.html
 
 import argparse
-from fcntl import DN_DELETE
+import platform
 import sys
+from fcntl import DN_DELETE
 
 from mywebcamfeed import *
 from myvideofeed import *
@@ -49,6 +50,13 @@ def main():
 
     # read arguments from command line
     args = vars(parser.parse_args())
+
+    # get device information
+    device_info = platform.uname()
+    
+    if device_info.node == 'raspberrypi' and args['input'] == 'directory':
+        print("In Raspberry Pi devices only webcam is allowed as input source.")
+        exit(248)
 
     # arguments validation
     if ( args['input'] not in ['webcam', 'directory'] ):
