@@ -5,10 +5,19 @@ The violence applications has been created using two different technologies for 
 * Tensorflow 2.x.
 * OpenVINO toolkit.
 
-Application can be deployed:
+Violence detector deployment modes:
 
-* Standalone.
-* Containerized (only x86_64).
+|          | Standalone | Container |
+|----------|------------|-----------|
+| x86_64   |     Yes    |    Yes    |
+| Raspberry Pi |     Yes    |    No     |
+
+Violence detector functionalities:
+
+|          | Webcam     | Video files |
+|----------|------------|-----------|
+| x86_64   |     Yes    |    Yes    |
+| Raspberry Pi |     Yes    |    No     |
 
 ## Tensorflow 2.0 version
 
