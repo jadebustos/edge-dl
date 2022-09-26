@@ -184,8 +184,8 @@ To build the x86_64 image you need:
   ```bash
   [jadebustos@archimedes violence-detector]$ ls -lh models/
   total 728M
--rw-r--r--. 1 jadebustos jadebustos 254M Sep 12 22:26 myvgg16-model.tgz
--rw-r--r--. 1 jadebustos jadebustos 474M Sep 12 22:33 myvgg16-weights.h5
+  -rw-r--r--. 1 jadebustos jadebustos 254M Sep 12 22:26 myvgg16-model.tgz
+  -rw-r--r--. 1 jadebustos jadebustos 474M Sep 12 22:33 myvgg16-weights.h5
   [jadebustos@archimedes violence-detector]$
   ```
 
