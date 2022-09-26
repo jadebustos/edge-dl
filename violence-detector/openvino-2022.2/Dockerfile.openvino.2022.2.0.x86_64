@@ -1,0 +1,62 @@
+# Copyright (c) 2022 Jose Angel de Bustos Perez
+# May be copied or modified under the terms of 
+# the GNU General Public License v3.0. 
+# See https://www.gnu.org/licenses/gpl-3.0.html
+
+# buildah build -f Dockerfile.openvino.2022.2.0.x86_64 -t violence-detector-openvino-2022.2.0:v1
+# podman run --rm -d violence-detector-openvino-2022.2.0:v1
+
+
+FROM docker.io/ubuntu:focal-20220826
+
+LABEL version=1.0
+LABEL maintainer="jadebustos@gmail.com"
+#LABEL name=
+LABEL description="Violence detection"
+LABEL url="https://hub.docker.com/r/jadebustos2/violence-detector-openvino-2022.2.0"
+
+## for apt to be noninteractive
+ENV DEBIAN_FRONTEND noninteractive
+ENV DEBCONF_NONINTERACTIVE_SEEN true
+
+# violence-detector parameters
+ENV VIDEO_INDEX=0
+ENV INPUT="directory"
+ENV MODELXML="xception_frozen_graph.xml"
+ENV MODELBIN="xception_frozen_graph.bin"
+ENV ACCELERATOR="MYRIAD"
+ENV WIDTH=800
+ENV HEIGHT=600
+
+WORKDIR /srv/violence-detector
+
+# prepare environment
+RUN set -ex \
+    && apt update -y \
+    && apt upgrade -y \
+    && apt install tzdata python3.9 python3.9-venv libgl1-mesa-glx libglib2.0-0 software-properties-common -y \
+    && add-apt-repository universe \
+    && apt install libpython3.9 -y \
+    && add-apt-repository --remove universe \
+    && apt remove software-properties-common -y \
+    && apt autoremove -y \
+    && apt clean -y \
+    && apt autoclean -y \
+    && mkdir -p /opt/violence-detector/{output,input,models} \
+    && mkdir -p /srv/violence-detector \ 
+    && python3.9 -m venv openvino_env \ 
+    && . ./openvino_env/bin/activate \
+    && python -m pip install --upgrade pip \
+    && pip install openvino opencv-python
+
+# install application
+# model is not included in the repository, so if you want to create the 
+# container image you need to provide your own
+COPY models/xception* /opt/violence-detector/models/
+COPY *py entrypoint.sh /srv/violence-detector/
+
+# install violence-detector dependencies
+RUN set -ex \
+    && chmod 0555 /srv/violence-detector/entrypoint.sh 
+
+#ENTRYPOINT ["./entrypoint.sh"]
