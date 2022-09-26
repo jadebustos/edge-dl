@@ -171,7 +171,7 @@ For instance, to process images from the webcam using your custom model:
                              --name violence-detector -d docker.io/jadebustos2/violence-detector
 ```
 
-> ![](../icons/warning-icon.png) Your model will have to use 200x200 image size.
+> ![](../../icons/warning-icon.png) Your model will have to use 200x200 image size.
 
 ## Building your own container image
 
