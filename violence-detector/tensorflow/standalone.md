@@ -18,6 +18,14 @@ It is recommended using [python virtual environments](../virtual-environment.md)
 * *opencv-python*, 4.6.0.66 version was used.
 * *tensorflow*, 2.5.3 version was used.
 
+You will need to install the required python modules:
+
+```bash
+jadebustos@reypastor:~$ source ~/pyenvs/tfm-tf/bin/activate
+(tfm-tf) jadebustos@reypastor:~$ cd tfm
+(tfm-tf) jadebustos@reypastor:tfm$ pip install -r requirements.txt
+```
+
 Images will be resized to 200x200 to feed the deep learning models. If you use your own models you will need to modify **IMAGE_WIDTH** and **IMAGE_HEIGHT** variables in [myvars.py](myvars.py) to fit your input shape.
 
 By default one of each five images will be choosen to make a prediction. If you want to modify that you need to change the **FRAMES_STEP** variable in [myvars.py](myvars.py) accordingly.
