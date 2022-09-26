@@ -14,4 +14,5 @@ This application is intended to use OpenVINO. So, you need have a Myriad device 
 Using the application:
 
 * You can use the application in [standalone mode](standalone.md).
-* You can use the application using a [container image](containers.md). So you do not have to install the application and its dependencies.
+
+> ![](../../icons/information-icon.png) Application it is being migrated to OpenVINO 2022.2 which uses a new API. This new OpenVINO version is not supported on the Raspberry Pi.

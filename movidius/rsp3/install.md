@@ -51,3 +51,8 @@ pi@raspberrypi:~/build/open_model_zoo/tools/downloader $ python3 -m pip install 
 pi@raspberrypi:~/build/open_model_zoo/tools/downloader $ python3 downloader.py --name face-detection-adas-0001
 ```
 
+## Install violence-detector application
+
+Install violence-detector application as indicated in [OpenVINO violence-detector documentation](../../violence-detector/openvino/standalone.md).
+
+![](../../imgs/rsp3-screenshot.png)
