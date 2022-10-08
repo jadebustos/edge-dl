@@ -6,6 +6,7 @@
 # buildah build -f Dockerfile.openvino.2022.2.0.x86_64 -t violence-detector-openvino-2022.2.0:v1
 # podman run --rm -d violence-detector-openvino-2022.2.0:v1
 
+# https://storage.openvinotoolkit.org/repositories/openvino/packages/2022.2/linux
 
 FROM docker.io/ubuntu:focal-20220826
 
@@ -14,6 +15,8 @@ LABEL maintainer="jadebustos@gmail.com"
 #LABEL name=
 LABEL description="Violence detection"
 LABEL url="https://hub.docker.com/r/jadebustos2/violence-detector-openvino-2022.2.0"
+
+USER root
 
 ## for apt to be noninteractive
 ENV DEBIAN_FRONTEND noninteractive
@@ -28,35 +31,46 @@ ENV ACCELERATOR="MYRIAD"
 ENV WIDTH=800
 ENV HEIGHT=600
 
-WORKDIR /srv/violence-detector
-
 # prepare environment
 RUN set -ex \
+    && useradd -ms /bin/bash -d /srv/cctv cctv \
     && apt update -y \
     && apt upgrade -y \
     && apt install tzdata python3.9 python3.9-venv libgl1-mesa-glx libglib2.0-0 software-properties-common -y \
     && add-apt-repository universe \
-    && apt install libpython3.9 -y \
+    && apt install libpython3.9 gpg sudo udev -y \
     && add-apt-repository --remove universe \
     && apt remove software-properties-common -y \
     && apt autoremove -y \
     && apt clean -y \
-    && apt autoclean -y \
-    && mkdir -p /opt/violence-detector/{output,input,models} \
-    && mkdir -p /srv/violence-detector \ 
+    && apt autoclean -y 
+
+USER cctv
+WORKDIR /srv/cctv
+
+RUN set -ex \
+    && mkdir -p violence-detector/output \
+    && mkdir -p violence-detector/input \
+    && mkdir -p violence-detector/models \
     && python3.9 -m venv openvino_env \ 
     && . ./openvino_env/bin/activate \
     && python -m pip install --upgrade pip \
-    && pip install openvino opencv-python
+    && pip install openvino opencv-python numpy \
+    && mkdir -p intel 
+
+ADD --chown=cctv:cctv l_openvino_toolkit_ubuntu20_2022.2.0.7713.af16ea1d79a_x86_64.tgz /srv/cctv/intel
 
 # install application
 # model is not included in the repository, so if you want to create the 
 # container image you need to provide your own
-COPY models/xception* /opt/violence-detector/models/
-COPY *py entrypoint.sh /srv/violence-detector/
+COPY --chown=cctv:cctv models/xception* violence-detector/models/
+COPY --chown=cctv:cctv *py entrypoint.sh violence-detector/
 
-# install violence-detector dependencies
 RUN set -ex \
-    && chmod 0555 /srv/violence-detector/entrypoint.sh 
+    && ln -s /srv/cctv/intel/l_openvino_toolkit_ubuntu20_2022.2.0.7713.af16ea1d79a_x86_64/ /srv/cctv/intel/openvino \
+    && chmod 0555 violence-detector/entrypoint.sh 
+#    && . ./intel/openvino/setupvars.sh \
+#    && cd intel/openvino/install_dependencies \
+#    && bash ./install_NCS_udev_rules.sh \
 
 #ENTRYPOINT ["./entrypoint.sh"]
