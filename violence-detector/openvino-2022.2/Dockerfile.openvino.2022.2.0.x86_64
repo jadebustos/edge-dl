@@ -34,11 +34,13 @@ ENV HEIGHT=600
 # prepare environment
 RUN set -ex \
     && useradd -ms /bin/bash -d /srv/cctv cctv \
+    && usermod -a -G users cctv \
     && apt update -y \
     && apt upgrade -y \
-    && apt install tzdata python3.9 python3.9-venv libgl1-mesa-glx libglib2.0-0 software-properties-common -y \
+    && apt install tzdata python3.8 python3.8-venv libgl1-mesa-glx libglib2.0-0 software-properties-common -y \
+    && apt install usbutils v4l-utils -y \
     && add-apt-repository universe \
-    && apt install libpython3.9 gpg sudo udev -y \
+    && apt install libpython3.8 gpg sudo udev -y \
     && add-apt-repository --remove universe \
     && apt remove software-properties-common -y \
     && apt autoremove -y \
@@ -52,7 +54,7 @@ RUN set -ex \
     && mkdir -p violence-detector/output \
     && mkdir -p violence-detector/input \
     && mkdir -p violence-detector/models \
-    && python3.9 -m venv openvino_env \ 
+    && python3.8 -m venv openvino_env \ 
     && . ./openvino_env/bin/activate \
     && python -m pip install --upgrade pip \
     && pip install openvino opencv-python numpy \
@@ -68,9 +70,16 @@ COPY --chown=cctv:cctv *py entrypoint.sh violence-detector/
 
 RUN set -ex \
     && ln -s /srv/cctv/intel/l_openvino_toolkit_ubuntu20_2022.2.0.7713.af16ea1d79a_x86_64/ /srv/cctv/intel/openvino \
-    && chmod 0555 violence-detector/entrypoint.sh 
-#    && . ./intel/openvino/setupvars.sh \
-#    && cd intel/openvino/install_dependencies \
-#    && bash ./install_NCS_udev_rules.sh \
+    && chmod 0555 violence-detector/entrypoint.sh \
+    && echo "source intel/openvino/setupvars.sh" >> ~/.bashrc \
+    && echo "source openvino_env/bin/activate" >> ~/.bashrc
+
+USER root
+WORKDIR /srv/cctv/intel/openvino
+
+RUN ["/bin/bash", "-c", ". ./setupvars.sh ; cd install_dependencies ; ./install_NCS_udev_rules.sh"]
+
+USER cctv
+WORKDIR /srv/cctv/
 
 #ENTRYPOINT ["./entrypoint.sh"]
