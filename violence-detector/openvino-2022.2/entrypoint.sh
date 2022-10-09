@@ -5,8 +5,9 @@
 # the GNU General Public License v3.0. 
 # See https://www.gnu.org/licenses/gpl-3.0.html
 
-# activate python environment
-. ./openvino_env/bin/activate
+# activate openvino and python environment
+source ~/intel/openvino/setupvars.sh
+source ~/openvino_env/bin/activate
 
 case $INPUT in
     "directory") /usr/bin/python3 violence-detector.py --input $INPUT --model-xml $MODELXML \
